@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    k8s-app: ssm-agent
+  name: ssm-agent
+spec:
+  selector:
+    matchLabels:
+      k8s-app: ssm-agent
+  template:
+    metadata:
+      labels:
+        k8s-app: ssm-agent
+    spec:
+      containers:
+      - image: ubuntu
+        imagePullPolicy: Always
+        name: ssm
+        command: ["/bin/bash"]
+        args: ["-c","sleep infinity"]
+        securityContext:
+          allowPrivilegeEscalation: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always

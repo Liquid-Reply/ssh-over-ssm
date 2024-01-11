@@ -1,0 +1,27 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: private-cluster
+  region: eu-central-1
+
+privateCluster:
+  enabled: true
+  additionalEndpointServices:
+  - "autoscaling"
+
+vpc:
+  subnets:
+    private:
+      eu-central-1a:
+        id: subnet-08db1daf3634d10b1
+      eu-central-1b:
+        id: subnet-093740804c8f75657
+      eu-central-1c:
+        id: subnet-057fc3a4e0e6856c3
+
+nodeGroups:
+- name: ng1
+  instanceType: m5.large
+  desiredCapacity: 1
+  privateNetworking: true
